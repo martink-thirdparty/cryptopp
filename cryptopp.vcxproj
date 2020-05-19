@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DLL-Import Debug|Win32">
+      <Configuration>DLL-Import Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DLL-Import Debug|x64">
+      <Configuration>DLL-Import Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DLL-Import Release|Win32">
+      <Configuration>DLL-Import Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DLL-Import Release|x64">
+      <Configuration>DLL-Import Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3423EC9A-52E4-4A4D-9753-EDEBC38785EF}</ProjectGuid>
+    <RootNamespace>cryptlib</RootNamespace>
+    <PlatformToolset>v140</PlatformToolset>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='DLL-Import Debug|x64'">
+    <Import Project="..\..\property-sheets\build settings.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='DLL-Import Debug|Win32'">
+    <Import Project="..\..\property-sheets\build settings.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='DLL-Import Release|x64'">
+    <Import Project="..\..\property-sheets\build settings.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='DLL-Import Release|Win32'">
+    <Import Project="..\..\property-sheets\build settings.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="..\..\property-sheets\build settings.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="..\..\property-sheets\build settings.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="..\..\property-sheets\build settings.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="..\..\property-sheets\build settings.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <!-- End of Visual Studio boilerplate -->
+  <!-- All Configurations -->
+  <PropertyGroup Label="All Configurations">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <TargetName>cryptlib</TargetName>
+    <TargetExt>.lib</TargetExt>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <!-- All Configurations -->
+  <ItemDefinitionGroup Label="All Configurations">
+    <ClCompile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ErrorReporting>None</ErrorReporting>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Lib>
+      <ErrorReporting>NoErrorReport</ErrorReporting>
+    </Lib>
+  </ItemDefinitionGroup>
+  <!-- Debug Configurations -->
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='DLL-Import Debug'" Label="Debug Configuration">
+    <ClCompile>
+      <PreprocessorDefinitions>USE_PRECOMPILED_HEADERS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <!-- Release Configurations -->
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release' Or '$(Configuration)'=='DLL-Import Release'" Label="Release Configuration">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;USE_PRECOMPILED_HEADERS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <!-- DLL-Import Overrides for Preprocessor -->
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='DLL-Import Debug'" Label="DLL Debug Configuration">
+    <ClCompile>
+      <PreprocessorDefinitions>USE_PRECOMPILED_HEADERS;CRYPTOPP_IMPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='DLL-Import Release'" Label="DLL Debug Configuration">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;USE_PRECOMPILED_HEADERS;CRYPTOPP_IMPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <!-- X86 Configurations -->
+  <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'" Label="X86 Configuration">
+    <ClCompile>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Lib>
+      <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
+    </Lib>
+  </ItemDefinitionGroup>
+  <!-- X64 Configurations -->
+  <ItemDefinitionGroup Condition="'$(Platform)'=='x64'" Label="X64 Configuration">
+    <ClCompile>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Lib>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Lib>
+  </ItemDefinitionGroup>
+  <!-- Original File with special treatment -->
+  <!-- Source Files -->
+  <!-- The order of the first three matters -->
+  <ItemGroup>
+    <ClCompile Include="vanilla\cryptlib.cpp" />
+    <ClCompile Include="vanilla\cpu.cpp" />
+    <ClCompile Include="vanilla\integer.cpp" />
+    <ClCompile Include="vanilla\3way.cpp" />
+    <ClCompile Include="vanilla\adler32.cpp" />
+    <ClCompile Include="vanilla\algebra.cpp" />
+    <ClCompile Include="vanilla\algparam.cpp" />
+    <ClCompile Include="vanilla\arc4.cpp" />
+    <ClCompile Include="vanilla\asn.cpp" />
+    <ClCompile Include="vanilla\authenc.cpp" />
+    <ClCompile Include="vanilla\base32.cpp" />
+    <ClCompile Include="vanilla\base64.cpp" />
+    <ClCompile Include="vanilla\basecode.cpp" />
+    <ClCompile Include="vanilla\bfinit.cpp" />
+    <ClCompile Include="vanilla\blake2.cpp" />
+    <ClCompile Include="vanilla\blowfish.cpp" />
+    <ClCompile Include="vanilla\blumshub.cpp" />
+    <ClCompile Include="vanilla\camellia.cpp" />
+    <ClCompile Include="vanilla\cast.cpp" />
+    <ClCompile Include="vanilla\casts.cpp" />
+    <ClCompile Include="vanilla\cbcmac.cpp" />
+    <ClCompile Include="vanilla\ccm.cpp" />
+    <ClCompile Include="vanilla\chacha.cpp" />
+    <ClCompile Include="vanilla\channels.cpp" />
+    <ClCompile Include="vanilla\cmac.cpp" />
+    <ClCompile Include="vanilla\crc.cpp" />
+    <ClCompile Include="vanilla\default.cpp" />
+    <ClCompile Include="vanilla\des.cpp" />
+    <ClCompile Include="vanilla\dessp.cpp" />
+    <ClCompile Include="vanilla\dh.cpp" />
+    <ClCompile Include="vanilla\dh2.cpp" />
+    <ClCompile Include="vanilla\dll.cpp">
+      <PrecompiledHeader />
+    </ClCompile>
+    <ClCompile Include="vanilla\dsa.cpp" />
+    <ClCompile Include="vanilla\eax.cpp" />
+    <ClCompile Include="vanilla\ec2n.cpp" />
+    <ClCompile Include="vanilla\eccrypto.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="vanilla\ecp.cpp" />
+    <ClCompile Include="vanilla\elgamal.cpp" />
+    <ClCompile Include="vanilla\emsa2.cpp" />
+    <ClCompile Include="vanilla\eprecomp.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="vanilla\esign.cpp" />
+    <ClCompile Include="vanilla\files.cpp" />
+    <ClCompile Include="vanilla\filters.cpp" />
+    <ClCompile Include="vanilla\fips140.cpp" />
+    <ClCompile Include="vanilla\fipstest.cpp" />
+    <ClCompile Include="vanilla\gcm.cpp" />
+    <ClCompile Include="vanilla\gf256.cpp" />
+    <ClCompile Include="vanilla\gf2_32.cpp" />
+    <ClCompile Include="vanilla\gf2n.cpp" />
+    <ClCompile Include="vanilla\gfpcrypt.cpp" />
+    <ClCompile Include="vanilla\gost.cpp" />
+    <ClCompile Include="vanilla\gzip.cpp" />
+    <ClCompile Include="vanilla\hex.cpp" />
+    <ClCompile Include="vanilla\hmac.cpp" />
+    <ClCompile Include="vanilla\hrtimer.cpp" />
+    <ClCompile Include="vanilla\ida.cpp" />
+    <ClCompile Include="vanilla\idea.cpp" />
+    <ClCompile Include="vanilla\iterhash.cpp">
+      <PrecompiledHeader />
+    </ClCompile>
+    <ClCompile Include="vanilla\keccak.cpp" />
+    <ClCompile Include="vanilla\luc.cpp" />
+    <ClCompile Include="vanilla\mars.cpp" />
+    <ClCompile Include="vanilla\marss.cpp" />
+    <ClCompile Include="vanilla\md2.cpp" />
+    <ClCompile Include="vanilla\md4.cpp" />
+    <ClCompile Include="vanilla\md5.cpp" />
+    <ClCompile Include="vanilla\misc.cpp" />
+    <ClCompile Include="vanilla\modes.cpp" />
+    <ClCompile Include="vanilla\mqueue.cpp" />
+    <ClCompile Include="vanilla\mqv.cpp" />
+    <ClCompile Include="vanilla\nbtheory.cpp" />
+    <ClCompile Include="vanilla\network.cpp" />
+    <ClCompile Include="vanilla\oaep.cpp" />
+    <ClCompile Include="vanilla\osrng.cpp" />
+    <ClCompile Include="vanilla\panama.cpp" />
+    <ClCompile Include="vanilla\pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="vanilla\pkcspad.cpp" />
+    <ClCompile Include="vanilla\polynomi.cpp" />
+    <ClCompile Include="vanilla\pssr.cpp" />
+    <ClCompile Include="vanilla\pubkey.cpp" />
+    <ClCompile Include="vanilla\queue.cpp" />
+    <ClCompile Include="vanilla\rabin.cpp" />
+    <ClCompile Include="vanilla\randpool.cpp" />
+    <ClCompile Include="vanilla\rc2.cpp" />
+    <ClCompile Include="vanilla\rc5.cpp" />
+    <ClCompile Include="vanilla\rc6.cpp" />
+    <ClCompile Include="vanilla\rdrand.cpp" />
+    <ClCompile Include="vanilla\rdtables.cpp" />
+    <ClCompile Include="vanilla\rijndael.cpp" />
+    <ClCompile Include="vanilla\ripemd.cpp" />
+    <ClCompile Include="vanilla\rng.cpp" />
+    <ClCompile Include="vanilla\rsa.cpp" />
+    <ClCompile Include="vanilla\rw.cpp" />
+    <ClCompile Include="vanilla\safer.cpp" />
+    <ClCompile Include="vanilla\salsa.cpp" />
+    <ClCompile Include="vanilla\seal.cpp" />
+    <ClCompile Include="vanilla\seed.cpp" />
+    <ClCompile Include="vanilla\serpent.cpp" />
+    <ClCompile Include="vanilla\sha.cpp" />
+    <ClCompile Include="vanilla\sha3.cpp" />
+    <ClCompile Include="vanilla\shacal2.cpp" />
+    <ClCompile Include="vanilla\shark.cpp" />
+    <ClCompile Include="vanilla\sharkbox.cpp" />
+    <ClCompile Include="vanilla\simple.cpp" />
+    <ClCompile Include="vanilla\skipjack.cpp" />
+    <ClCompile Include="vanilla\socketft.cpp" />
+    <ClCompile Include="vanilla\sosemanuk.cpp" />
+    <ClCompile Include="vanilla\square.cpp" />
+    <ClCompile Include="vanilla\squaretb.cpp" />
+    <ClCompile Include="vanilla\strciphr.cpp" />
+    <ClCompile Include="vanilla\tea.cpp" />
+    <ClCompile Include="vanilla\tftables.cpp" />
+    <ClCompile Include="vanilla\tiger.cpp" />
+    <ClCompile Include="vanilla\tigertab.cpp" />
+    <ClCompile Include="vanilla\trdlocal.cpp" />
+    <ClCompile Include="vanilla\ttmac.cpp" />
+    <ClCompile Include="vanilla\twofish.cpp" />
+    <ClCompile Include="vanilla\vmac.cpp" />
+    <ClCompile Include="vanilla\wait.cpp" />
+    <ClCompile Include="vanilla\wake.cpp" />
+    <ClCompile Include="vanilla\whrlpool.cpp" />
+    <ClCompile Include="vanilla\winpipes.cpp" />
+    <ClCompile Include="vanilla\xtr.cpp" />
+    <ClCompile Include="vanilla\xtrcrypt.cpp" />
+    <ClCompile Include="vanilla\zdeflate.cpp" />
+    <ClCompile Include="vanilla\zinflate.cpp" />
+    <ClCompile Include="vanilla\zlib.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="vanilla\adhoc.cpp.proto">
+      <Command>
+        if not exist adhoc.cpp copy "%(FullPath)" vanilla\adhoc.cpp
+        echo: &gt;&gt; vanilla\adhoc.cpp.copied
+      </Command>
+      <Outputs>adhoc.cpp.copied;%(Outputs)</Outputs>
+    </CustomBuild>
+    <None Include="vanilla\Doxyfile" />
+    <None Include="vanilla\GNUmakefile" />
+    <None Include="vanilla\License.txt" />
+    <None Include="vanilla\Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Condition="'$(Platform)'=='Win32'" Include="vanilla\rdrand.asm">
+      <Message>Building and assembling rdrand.asm</Message>
+      <Command>ml.exe /c /nologo /D_M_X86 /W3 /Cx /Zi /safeseh /Fo"$(IntDir)rdrand-x86.obj" "%(FullPath)"</Command>
+      <Outputs>$(IntDir)\rdrand-x86.obj</Outputs>
+    </CustomBuild>
+    <CustomBuild Condition="'$(Platform)'=='x64'" Include="vanilla\rdrand.asm">
+      <Message>Building and assembling rdrand.asm</Message>
+      <Command>ml64.exe /c /nologo /D_M_X64 /W3 /Cx /Zi /Fo"$(IntDir)rdrand-x64.obj" "%(FullPath)"</Command>
+      <Outputs>$(IntDir)\rdrand-x64.obj</Outputs>
+    </CustomBuild>
+    <CustomBuild Condition="'$(Platform)'=='x64' AND ('$(Configuration)'=='Debug' Or '$(Configuration)'=='Release')" Include="vanilla\x64dll.asm">
+      <Message>Building and assembling x64dll.asm</Message>
+      <Command>ml64.exe /c /nologo /D_M_X64 /W3 /Zi /Fo"$(IntDir)x64dll.obj" "%(FullPath)"</Command>
+      <Outputs>$(IntDir)x64dll.obj</Outputs>
+    </CustomBuild>
+    <CustomBuild Condition="'$(Platform)'=='x64'" Include="vanilla\x64masm.asm">
+      <Message>Building and Assembling x64masm.asm</Message>
+      <Command>ml64.exe /c /nologo /D_M_X64 /W3 /Zi /Fo"$(IntDir)x64masm.obj" "%(FullPath)"</Command>
+      <Outputs>$(IntDir)x64masm.obj;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="vanilla\3way.h" />
+    <ClInclude Include="vanilla\adler32.h" />
+    <ClInclude Include="vanilla\aes.h" />
+    <ClInclude Include="vanilla\algebra.h" />
+    <ClInclude Include="vanilla\algparam.h" />
+    <ClInclude Include="vanilla\arc4.h" />
+    <ClInclude Include="vanilla\argnames.h" />
+    <ClInclude Include="vanilla\asn.h" />
+    <ClInclude Include="vanilla\authenc.h" />
+    <ClInclude Include="vanilla\base32.h" />
+    <ClInclude Include="vanilla\base64.h" />
+    <ClInclude Include="vanilla\basecode.h" />
+    <ClInclude Include="vanilla\blake2.h" />
+    <ClInclude Include="vanilla\blowfish.h" />
+    <ClInclude Include="vanilla\blumshub.h" />
+    <ClInclude Include="vanilla\camellia.h" />
+    <ClInclude Include="vanilla\cast.h" />
+    <ClInclude Include="vanilla\cbcmac.h" />
+    <ClInclude Include="vanilla\ccm.h" />
+    <ClInclude Include="vanilla\chacha.h" />
+    <ClInclude Include="vanilla\channels.h" />
+    <ClInclude Include="vanilla\cmac.h" />
+    <ClInclude Include="vanilla\config.h" />
+    <ClInclude Include="vanilla\cpu.h" />
+    <ClInclude Include="vanilla\crc.h" />
+    <ClInclude Include="vanilla\cryptlib.h" />
+    <ClInclude Include="vanilla\default.h" />
+    <ClInclude Include="vanilla\des.h" />
+    <ClInclude Include="vanilla\dh.h" />
+    <ClInclude Include="vanilla\dh2.h" />
+    <ClInclude Include="vanilla\dmac.h" />
+    <ClInclude Include="vanilla\dsa.h" />
+    <ClInclude Include="vanilla\eax.h" />
+    <ClInclude Include="vanilla\ec2n.h" />
+    <ClInclude Include="vanilla\eccrypto.h" />
+    <ClInclude Include="vanilla\ecp.h" />
+    <ClInclude Include="vanilla\elgamal.h" />
+    <ClInclude Include="vanilla\emsa2.h" />
+    <ClInclude Include="vanilla\eprecomp.h" />
+    <ClInclude Include="vanilla\esign.h" />
+    <ClInclude Include="vanilla\files.h" />
+    <ClInclude Include="vanilla\filters.h" />
+    <ClInclude Include="vanilla\fips140.h" />
+    <ClInclude Include="vanilla\fhmqv.h" />
+    <ClInclude Include="vanilla\fltrimpl.h" />
+    <ClInclude Include="vanilla\gcm.h" />
+    <ClInclude Include="vanilla\gf256.h" />
+    <ClInclude Include="vanilla\gf2_32.h" />
+    <ClInclude Include="vanilla\gf2n.h" />
+    <ClInclude Include="vanilla\gfpcrypt.h" />
+    <ClInclude Include="vanilla\gost.h" />
+    <ClInclude Include="vanilla\gzip.h" />
+    <ClInclude Include="vanilla\hex.h" />
+    <ClInclude Include="vanilla\hkdf.h" />
+    <ClInclude Include="vanilla\hmac.h" />
+    <ClInclude Include="vanilla\hmqv.h" />
+    <ClInclude Include="vanilla\hrtimer.h" />
+    <ClInclude Include="vanilla\ida.h" />
+    <ClInclude Include="vanilla\idea.h" />
+    <ClInclude Include="vanilla\integer.h" />
+    <ClInclude Include="vanilla\iterhash.h" />
+    <ClInclude Include="vanilla\keccak.h" />
+    <ClInclude Include="vanilla\lubyrack.h" />
+    <ClInclude Include="vanilla\luc.h" />
+    <ClInclude Include="vanilla\mars.h" />
+    <ClInclude Include="vanilla\md2.h" />
+    <ClInclude Include="vanilla\md4.h" />
+    <ClInclude Include="vanilla\md5.h" />
+    <ClInclude Include="vanilla\mdc.h" />
+    <ClInclude Include="vanilla\misc.h" />
+    <ClInclude Include="vanilla\modarith.h" />
+    <ClInclude Include="vanilla\modes.h" />
+    <ClInclude Include="vanilla\modexppc.h" />
+    <ClInclude Include="vanilla\mqueue.h" />
+    <ClInclude Include="vanilla\mqv.h" />
+    <ClInclude Include="vanilla\nbtheory.h" />
+    <ClInclude Include="vanilla\network.h" />
+    <ClInclude Include="vanilla\nr.h" />
+    <ClInclude Include="vanilla\oaep.h" />
+    <ClInclude Include="vanilla\oids.h" />
+    <ClInclude Include="vanilla\osrng.h" />
+    <ClInclude Include="vanilla\panama.h" />
+    <ClInclude Include="vanilla\pch.h" />
+    <ClInclude Include="vanilla\pkcspad.h" />
+    <ClInclude Include="vanilla\polynomi.h" />
+    <ClInclude Include="vanilla\pssr.h" />
+    <ClInclude Include="vanilla\pubkey.h" />
+    <ClInclude Include="vanilla\pwdbased.h" />
+    <ClInclude Include="vanilla\queue.h" />
+    <ClInclude Include="vanilla\rabin.h" />
+    <ClInclude Include="vanilla\randpool.h" />
+    <ClInclude Include="vanilla\rc2.h" />
+    <ClInclude Include="vanilla\rc5.h" />
+    <ClInclude Include="vanilla\rc6.h" />
+    <ClInclude Include="vanilla\rdrand.h" />
+    <ClInclude Include="vanilla\rijndael.h" />
+    <ClInclude Include="vanilla\ripemd.h" />
+    <ClInclude Include="vanilla\rng.h" />
+    <ClInclude Include="vanilla\rsa.h" />
+    <ClInclude Include="vanilla\rw.h" />
+    <ClInclude Include="vanilla\safer.h" />
+    <ClInclude Include="vanilla\salsa.h" />
+    <ClInclude Include="vanilla\seal.h" />
+    <ClInclude Include="vanilla\secblock.h" />
+    <ClInclude Include="vanilla\seckey.h" />
+    <ClInclude Include="vanilla\seed.h" />
+    <ClInclude Include="vanilla\serpent.h" />
+    <ClInclude Include="vanilla\sha.h" />
+    <ClInclude Include="vanilla\sha3.h" />
+    <ClInclude Include="vanilla\shacal2.h" />
+    <ClInclude Include="vanilla\shark.h" />
+    <ClInclude Include="vanilla\simple.h" />
+    <ClInclude Include="vanilla\skipjack.h" />
+    <ClInclude Include="vanilla\smartptr.h" />
+    <ClInclude Include="vanilla\socketft.h" />
+    <ClInclude Include="vanilla\sosemanuk.h" />
+    <ClInclude Include="vanilla\square.h" />
+    <ClInclude Include="vanilla\stdcpp.h" />
+    <ClInclude Include="vanilla\strciphr.h" />
+    <ClInclude Include="vanilla\tea.h" />
+    <ClInclude Include="vanilla\tiger.h" />
+    <ClInclude Include="vanilla\trap.h" />
+    <ClInclude Include="vanilla\trdlocal.h" />
+    <ClInclude Include="vanilla\trunhash.h" />
+    <ClInclude Include="vanilla\ttmac.h" />
+    <ClInclude Include="vanilla\twofish.h" />
+    <ClInclude Include="vanilla\vmac.h" />
+    <ClInclude Include="vanilla\wait.h" />
+    <ClInclude Include="vanilla\wake.h" />
+    <ClInclude Include="vanilla\whrlpool.h" />
+    <ClInclude Include="vanilla\winpipes.h" />
+    <ClInclude Include="vanilla\words.h" />
+    <ClInclude Include="vanilla\xtr.h" />
+    <ClInclude Include="vanilla\xtrcrypt.h" />
+    <ClInclude Include="vanilla\zdeflate.h" />
+    <ClInclude Include="vanilla\zinflate.h" />
+    <ClInclude Include="vanilla\zlib.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>
