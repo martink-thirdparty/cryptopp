@@ -203,7 +203,7 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <PostBuildEvent>
-      <Command>copy_includes.cmd $(ProjectDir)\vanilla $(OutDir)\cryptopp</Command>
+      <Command>copy_includes.cmd "$(ProjectDir)\vanilla" "$(OutDir)\cryptopp"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
